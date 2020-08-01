@@ -8,5 +8,5 @@ This project was made using Godot.
 
 * [Pedroza](https://pedrozox.itch.io/)
 * [Justin Kearin](https://www.justinkearin.com/)
-* FoxHyode
+* [FoxHyode](https://foxhyode.itch.io/)
 * Lincoln
