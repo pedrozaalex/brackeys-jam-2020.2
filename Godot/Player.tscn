@@ -18,5 +18,7 @@ drag_margin_top = 0.01
 drag_margin_right = 0.01
 drag_margin_bottom = 0.01
 
-[node name="PlayerController" type="Node" parent="."]
+[node name="PlayerController" type="Node" parent="." groups=[
+"controllers",
+]]
 script = ExtResource( 2 )
