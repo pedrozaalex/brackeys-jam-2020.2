@@ -17,8 +17,10 @@ func _unhandled_input(event):
 		move_vector.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 
 func _physics_process(delta):
-	position += move_vector * SPEED * delta
 	adjust_camera()
+
+func move(vector, delta):
+	position += vector * SPEED * delta
 
 func adjust_camera():
 	var mouse_pos = viewport.get_mouse_position()
