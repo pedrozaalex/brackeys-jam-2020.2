@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -185.5
+margin_top = 64.0
+margin_right = 185.5
+margin_bottom = 78.0
+text = "This is the in-game hud. It is the scene named \"Hud.tscn\""
+__meta__ = {
+"_edit_use_anchors_": false
+}
