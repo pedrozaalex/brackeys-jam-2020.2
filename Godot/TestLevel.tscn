@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="GDScript" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 var main_menu_func : FuncRef
@@ -10,13 +12,13 @@ func _unhandled_input(event):
 		main_menu_func.call_func()
 "
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 1.4, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -26,12 +28,14 @@ orbit_velocity = 1.0
 orbit_velocity_random = 0.5
 scale = 10.0
 scale_random = 0.5
-scale_curve = SubResource( 2 )
+scale_curve = SubResource( 3 )
 
 [node name="TestLevel" type="Node2D"]
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 520, 300 )
 amount = 32
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]

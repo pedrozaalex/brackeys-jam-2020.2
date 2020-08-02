@@ -1,5 +1,7 @@
 extends Node
 
+onready var ui_layer = $UILayer
+
 var world
 var ui
 
@@ -26,5 +28,5 @@ func load_game():
 	world = load("res://TestLevel.tscn").instance()
 	add_child(world)
 	ui = load("res://HUD.tscn").instance()
-	add_child(ui)
+	ui_layer.add_child(ui)
 	world.main_menu_func = funcref(self, "load_main_menu")
