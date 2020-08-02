@@ -5,13 +5,12 @@
 [ext_resource path="res://Test-Level/Rewind_End.wav" type="AudioStream" id=3]
 [ext_resource path="res://Test-Level/Player.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 onready var rewind_sound = $RewindSound
 onready var rewind_end_sound = $RewindEndSound
-onready var particles = $Particles2D
+onready var particles = $TestParticles2D
 
 var main_menu_func : FuncRef
 
@@ -19,14 +18,20 @@ func _unhandled_input(event):
 	if event.is_action_pressed(\"open_menu\"):
 		main_menu_func.call_func()
 	elif event.is_action_pressed(\"rewind_time\"):
-		get_tree().call_group(\"controllers\", \"begin_rewind\")
-		$RewindSound.play()
-		particles.speed_scale = -1
+		start_rewind()
 	elif event.is_action_released(\"rewind_time\"):
-		get_tree().call_group(\"controllers\", \"end_rewind\")
-		$RewindEndSound.play()
-		$RewindSound.stop()
-		particles.speed_scale = 1
+		end_rewind()
+
+func start_rewind():
+	get_tree().call_group(\"controllers\", \"begin_rewind\")
+	rewind_sound.play()
+	particles.speed_scale = -1
+
+func end_rewind():
+	get_tree().call_group(\"controllers\", \"end_rewind\")
+	rewind_end_sound.play()
+	rewind_sound.stop()
+	particles.speed_scale = 1
 "
 
 [sub_resource type="Curve" id=2]
@@ -50,7 +55,7 @@ scale_curve = SubResource( 3 )
 [node name="TestLevel" type="Node2D"]
 script = SubResource( 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="TestParticles2D" type="Particles2D" parent="."]
 position = Vector2( 520, 300 )
 amount = 32
 process_material = SubResource( 4 )
