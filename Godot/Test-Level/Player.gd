@@ -22,20 +22,25 @@ func _physics_process(delta):
 func move(vector, delta):
 	position += vector * SPEED * delta
 
-func adjust_camera():
-	var mouse_pos = viewport.get_mouse_position()
-	# WARNING THIS WONT WORK AT OTHER RESOLUTIONS!
-	if mouse_pos.x >= 1280 - SCREEN_DRAG_BORDER_MIN:
-		camera.position.x = lerp(0, MAX_CAM_DISTANCE, min((mouse_pos.x - (1280 - SCREEN_DRAG_BORDER_MIN)) / SCREEN_DRAG_BORDER_MAX, 1))
-	elif mouse_pos.x < SCREEN_DRAG_BORDER_MIN:
-		camera.position.x = lerp(0, -MAX_CAM_DISTANCE, min(1, (1.0 - ((mouse_pos.x - SCREEN_DRAG_BORDER_MAX) / (SCREEN_DRAG_BORDER_MIN - SCREEN_DRAG_BORDER_MAX)))))
+# WARNING THIS WONT WORK AT OTHER RESOLUTIONS!
+# OH MY GOLLY GEE THAT IS SOME GOREY CODE CRIMENY
+func adjust_camera_horizontal(mouse_x):
+	if mouse_x >= 1280 - SCREEN_DRAG_BORDER_MIN:
+		camera.position.x = lerp(0, MAX_CAM_DISTANCE, min((mouse_x - (1280 - SCREEN_DRAG_BORDER_MIN)) / SCREEN_DRAG_BORDER_MAX, 1))
+	elif mouse_x < SCREEN_DRAG_BORDER_MIN:
+		camera.position.x = lerp(0, -MAX_CAM_DISTANCE, min(1, (1.0 - ((mouse_x - SCREEN_DRAG_BORDER_MAX) / (SCREEN_DRAG_BORDER_MIN - SCREEN_DRAG_BORDER_MAX)))))
 	else:
 		camera.position.x = 0
-	
-	# OH MY GOLLY GEE THAT IS SOME GOREY CODE CRIMENY
-	if mouse_pos.y >= 720 - SCREEN_DRAG_BORDER_MIN:
-		camera.position.y = lerp(0, MAX_CAM_DISTANCE, min((mouse_pos.y - (720 - SCREEN_DRAG_BORDER_MIN)) / SCREEN_DRAG_BORDER_MAX, 1))
-	elif mouse_pos.y < SCREEN_DRAG_BORDER_MIN:
-		camera.position.y = lerp(0, -MAX_CAM_DISTANCE, min(1, (1.0 - ((mouse_pos.y - SCREEN_DRAG_BORDER_MAX) / (SCREEN_DRAG_BORDER_MIN - SCREEN_DRAG_BORDER_MAX)))))
+
+func adjust_camera_vertical(mouse_y):
+	if mouse_y >= 720 - SCREEN_DRAG_BORDER_MIN:
+		camera.position.y = lerp(0, MAX_CAM_DISTANCE, min((mouse_y - (720 - SCREEN_DRAG_BORDER_MIN)) / SCREEN_DRAG_BORDER_MAX, 1))
+	elif mouse_y < SCREEN_DRAG_BORDER_MIN:
+		camera.position.y = lerp(0, -MAX_CAM_DISTANCE, min(1, (1.0 - ((mouse_y - SCREEN_DRAG_BORDER_MAX) / (SCREEN_DRAG_BORDER_MIN - SCREEN_DRAG_BORDER_MAX)))))
 	else:
 		camera.position.y = 0
+
+func adjust_camera():
+	var mouse_pos = viewport.get_mouse_position()
+	adjust_camera_horizontal(mouse_pos.x)
+	adjust_camera_vertical(mouse_pos.y)
