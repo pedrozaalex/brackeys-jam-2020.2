@@ -41,6 +41,8 @@ func end_rewind():
 	for i in range(len(inputs) - 1, 0, -1):
 		if inputs[i][0] > effective_frame:
 			inputs.remove(i)
+	
+	update_move_vector()
 
 func _unhandled_input(event):
 	if playback_mode == PLAYBACK_MODE.REWIND:
