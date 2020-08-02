@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Rewind_Start_Loop.wav" type="AudioStream" id=3]
+[ext_resource path="res://Rewind_End.wav" type="AudioStream" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
+
+onready var rewind_sound = $RewindSound
+onready var rewind_end_sound = $RewindEndSound
 
 var main_menu_func : FuncRef
 
@@ -13,8 +18,11 @@ func _unhandled_input(event):
 		main_menu_func.call_func()
 	elif event.is_action_pressed(\"rewind_time\"):
 		get_tree().call_group(\"controllers\", \"begin_rewind\")
+		$RewindSound.play()
 	elif event.is_action_released(\"rewind_time\"):
 		get_tree().call_group(\"controllers\", \"end_rewind\")
+		$RewindEndSound.play()
+		$RewindSound.stop()
 "
 
 [sub_resource type="Curve" id=2]
@@ -47,3 +55,9 @@ process_material = SubResource( 4 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 256, 0 )
+
+[node name="RewindSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="RewindEndSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
