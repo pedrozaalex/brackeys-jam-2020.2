@@ -5,5 +5,5 @@ var start_game_func : FuncRef
 func _on_QuitButton_pressed():
 	get_tree().quit()
 
-func _on_Play_pressed():
+func _on_PlayButton_pressed():
 	start_game_func.call_func()
