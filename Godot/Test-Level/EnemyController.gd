@@ -11,6 +11,7 @@ var inputs = []
 
 var move_vector = Vector2.ZERO
 
+# TODO(Lincoln): This needs to be replaced with schedule-based decision making.
 var move_dirs = [Vector2.ZERO, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 var frames_per_move = 30
 var move_starting_frame = 0
@@ -19,16 +20,19 @@ var current_move = 0
 func _ready():
 	inputs.append([0, INPUTS.MOVE_VECTOR_CHANGED, move_vector])
 
+func process_normal(delta):
+	effective_frame += 1
+		
+	if (effective_frame - move_starting_frame) > frames_per_move:
+		move_starting_frame = effective_frame
+		current_move = (current_move + 1) % len(move_dirs)
+		update_move_vector(move_dirs[current_move])
+	
+	enemy.move(move_vector, delta)
+
 func _physics_process(delta):
 	if playback_mode == PLAYBACK_MODE.NORMAL:
-		effective_frame += 1
-		
-		if (effective_frame - move_starting_frame) > frames_per_move:
-			move_starting_frame = effective_frame
-			current_move = (current_move + 1) % len(move_dirs)
-			update_move_vector(move_dirs[current_move])
-		
-		enemy.move(move_vector, delta)
+		process_normal(delta)
 	elif playback_mode == PLAYBACK_MODE.REWIND:
 		effective_frame = max(0, effective_frame - 1)
 		move_vector = get_move_vector_at_frame(effective_frame)
