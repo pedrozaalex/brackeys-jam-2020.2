@@ -2,6 +2,9 @@
 
 This is a group submission for the 2nd 2020 Brackeys Game Jam.
 
+The main character uses a magical casette tape to get away with the
+perfect murder.
+
 This project was made using Godot.
 
 ## Team Members
