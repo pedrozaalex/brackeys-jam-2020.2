@@ -19,14 +19,14 @@ func clear_current_scenes():
 
 func load_main_menu():
 	clear_current_scenes()
-	ui = load("res://MainMenu.tscn").instance()
+	ui = load("res://Main-Menu/MainMenu.tscn").instance()
 	add_child(ui)
 	ui.start_game_func = funcref(self, "load_game")
 
 func load_game():
 	clear_current_scenes()
-	world = load("res://TestLevel.tscn").instance()
+	world = load("res://Test-Level/TestLevel.tscn").instance()
 	add_child(world)
-	ui = load("res://HUD.tscn").instance()
+	ui = load("res://Test-Level/HUD.tscn").instance()
 	ui_layer.add_child(ui)
 	world.main_menu_func = funcref(self, "load_main_menu")

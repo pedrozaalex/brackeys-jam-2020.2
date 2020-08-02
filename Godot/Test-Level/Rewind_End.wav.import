@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Rewind_Start_Loop.wav-7778bbcaf100fff04200fbd3a123d571.sample"
+path="res://.import/Rewind_End.wav-698ed9fcfd1595138bf5f2fd952bd707.sample"
 
 [deps]
 
-source_file="res://Rewind_Start_Loop.wav"
-dest_files=[ "res://.import/Rewind_Start_Loop.wav-7778bbcaf100fff04200fbd3a123d571.sample" ]
+source_file="res://Test-Level/Rewind_End.wav"
+dest_files=[ "res://.import/Rewind_End.wav-698ed9fcfd1595138bf5f2fd952bd707.sample" ]
 
 [params]
 
