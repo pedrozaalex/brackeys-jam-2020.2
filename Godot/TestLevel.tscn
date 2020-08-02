@@ -10,6 +10,7 @@ script/source = "extends Node2D
 
 onready var rewind_sound = $RewindSound
 onready var rewind_end_sound = $RewindEndSound
+onready var particles = $Particles2D
 
 var main_menu_func : FuncRef
 
@@ -19,10 +20,12 @@ func _unhandled_input(event):
 	elif event.is_action_pressed(\"rewind_time\"):
 		get_tree().call_group(\"controllers\", \"begin_rewind\")
 		$RewindSound.play()
+		particles.speed_scale = -1
 	elif event.is_action_released(\"rewind_time\"):
 		get_tree().call_group(\"controllers\", \"end_rewind\")
 		$RewindEndSound.play()
 		$RewindSound.stop()
+		particles.speed_scale = 1
 "
 
 [sub_resource type="Curve" id=2]
